@@ -57,7 +57,6 @@ Array.prototype.myEvery = function(callbackFn) {
 // REDUCE //
 Array.prototype.myReduce = function(callbackFn) {
   let definedValuesArray = this.myFilter(val => val != undefined);
-
   let prevVal = definedValuesArray[0];
   for (let i = 1; i < definedValuesArray.length; i++) {
     prevVal = callbackFn(prevVal, definedValuesArray[i], i, definedValuesArray);
@@ -67,7 +66,12 @@ Array.prototype.myReduce = function(callbackFn) {
 
 // INCLUDES //
 Array.prototype.myIncludes = function(searchElement) {
-  // Place your code here.
+  for (let el of this) {
+    if (el === searchElement) {
+      return true;
+    }
+  }
+  return false;
 };
 
 // INDEXOF //
@@ -181,12 +185,21 @@ function isPrime(num) {
 
 
 // Reduce //
-const reduceArray = [1, 2, 3, , 4, 0, -5];
-// 1 + 2 + 3 + 4
+const reduceArray = [1, 2, 3, , 4, 0, -5]; // 1 + 2 + 3 + 4 + 0 - 5 = 5
 const sumWithInitial1 = reduceArray.reduce(
   (previousValue, currentValue) => previousValue + currentValue);
 const sumWithInitial2 = reduceArray.myReduce(
   (previousValue, currentValue) => previousValue + currentValue);
-console.log(sumWithInitial1, sumWithInitial2, sumWithInitial1 == sumWithInitial2);
-// expected output: 5
+// console.log(sumWithInitial1, sumWithInitial2, sumWithInitial1 == sumWithInitial2);
 
+
+// Includes //
+const includesArray = [1, 2, 3];
+console.log(includesArray.includes(2), includesArray.myIncludes(2));
+console.log(includesArray.includes(), includesArray.myIncludes());
+console.log(includesArray.includes(true), includesArray.myIncludes(true));
+console.log(includesArray.includes(-1), includesArray.myIncludes(-1));
+
+const pets = ['cat', 'dog', ,'bat'];
+console.log(pets.includes('cat'), pets.myIncludes('cat'));
+console.log(pets.includes('at'), pets.myIncludes('at'));
