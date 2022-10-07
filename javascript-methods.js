@@ -15,8 +15,6 @@ Array.prototype.myMap = function(callbackFn) {
     if (this[i] == undefined) {
       myArray.push(undefined);
     } else {
-      // callbackFn is invoked with three arguments: 
-      // the value of the element, the index of the element, and the array object being mapped.
       myArray.push(callbackFn(this[i], i, this));
     }
   }
@@ -121,52 +119,52 @@ Object.myValues = function(object) {
 
 // -----------------------Testing Functions--------------------------------- //
 
+Array.prototype.equals = function (array) {
+  // if the other array is a falsy value, return
+  if (!array)
+    return false;
 
-// Array.prototype.equals = function (array) {
-//   // if the other array is a falsy value, return
-//   if (!array)
-//     return false;
+  // compare lengths - can save a lot of time 
+  if (this.length != array.length) {
+    return false;
+  }
 
-//   // compare lengths - can save a lot of time 
-//   if (this.length != array.length) {
-//     console.log(this, " == ", array, " is ", false, " [0]");
-//     return false;
-//   }
+  for (var i = 0, l=this.length; i < l; i++) {
+    // Check if we have nested arrays
+    if (this[i] instanceof Array && array[i] instanceof Array) {
+      // recurse into the nested arrays
+      if (!this[i].equals(array[i])) {
+        return false;       
+      }
+    }           
+    else if (this[i] != array[i]) { 
+      // Warning - two different object instances will never be equal: {x:20} != {x:20}
+      return false;   
+    }           
+  } 
+  return true;
+}
 
-//   for (var i = 0, l=this.length; i < l; i++) {
-//     // Check if we have nested arrays
-//     if (this[i] instanceof Array && array[i] instanceof Array) {
-//       // recurse into the nested arrays
-//       if (!this[i].equals(array[i])) {
-//         console.log(this, " == ", array, " is ", false, " [1]");
-//         return false;       
-//       }
-//     }           
-//     else if (this[i] != array[i]) { 
-//       // Warning - two different object instances will never be equal: {x:20} != {x:20}
-//       console.log(this, " == ", array, " is ", false, " [2]");
-//       return false;   
-//     }           
-//   } 
-//   console.log(this, " == ", array, " is ", true);      
-//   return true;
-// }
+function printEquals(a, b) {
+  console.log(a, " == ", b, " is ", a == b);
+}
 
+function printEqualsArray(a, b) {
+  console.log(a, " == ", b, " is ", a.equals(b));
+}
 
-// // Map //
-// let myArray = [0, -10, 3, 7, , ,102];
-// const map1 = myArray.map(x => x * 2);
-// const map2 = myArray.myMap(x => x * 2);
-
-// const numbers = [1, 4, 9];
-// const roots1 = numbers.map((num) => Math.sqrt(num));
-// const roots2 = numbers.myMap((num) => Math.sqrt(num));
+// Map //
+console.log("----TESTING MAP FUNCTION: myMap()----")
+let mapArray = [0, -10, 3, 7, ,102];
+printEqualsArray(mapArray.map(x => x * 2), mapArray.myMap(x => x * 2))
+mapArray = [1, 4, 9];
+printEqualsArray(mapArray.map((num) => Math.sqrt(num)), mapArray.myMap((num) => Math.sqrt(num)));
 
 // // Filter //
 // const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 // const result1 = words.filter(word => word.length > 6);
 // const result2 = words.myFilter(word => word.length > 6);
-// // result1.equals(result2); // [ 'exuberant', 'destruction', 'present' ]
+// result1.equals(result2); // [ 'exuberant', 'destruction', 'present' ]
 // const filterArray = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 // function isPrime(num) {
 //   for (let i = 2; num > i; i++) {
@@ -176,29 +174,28 @@ Object.myValues = function(object) {
 //   }
 //   return num > 1;
 // }
-// // filterArray.filter(isPrime).equals(filterArray.myFilter(isPrime)) // [2, 3, 5, 7, 11, 13]
+// filterArray.filter(isPrime).equals(filterArray.myFilter(isPrime)) // [2, 3, 5, 7, 11, 13]
 
 
-
-// // // Some //
-// // const even = (element) => element % 2 === 0; // checks whether an element is even
-// // let someArray = [];
-// // console.log(someArray.some(even) == (someArray.mySome(even)));
-// // someArray = [1];
-// // console.log(someArray.some(even) == (someArray.mySome(even)));
-// // someArray = [2];
-// // console.log(someArray.some(even) == (someArray.mySome(even)));
-// // someArray = [1,2,3,4,5,6];
-// // console.log(someArray.some(even) == (someArray.mySome(even)));
-// // someArray = [1,33,17,67];
-// // console.log(someArray.some(even) == (someArray.mySome(even)));
-// // someArray = [1,-2, -3, , , , -9];
-// // console.log(someArray.some(even) == (someArray.mySome(even)));
-// // function isBiggerThan10(element, index, array) {
-// //   return element > 10;
-// // }
-// // console.log([2, 5, 8, 1, 4].some(isBiggerThan10) == [2, 5, 8, 1, 4].mySome(isBiggerThan10));  // false
-// // console.log([12, 5, 8, 1, 4].some(isBiggerThan10) == [12, 5, 8, 1, 4].mySome(isBiggerThan10)); // true
+// // Some //
+// const even = (element) => element % 2 === 0; // checks whether an element is even
+// let someArray = [];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [2];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1,2,3,4,5,6];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1,33,17,67];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1,-2, -3, , , , -9];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// function isBiggerThan10(element, index, array) {
+//   return element > 10;
+// }
+// console.log([2, 5, 8, 1, 4].some(isBiggerThan10) == [2, 5, 8, 1, 4].mySome(isBiggerThan10));  // false
+// console.log([12, 5, 8, 1, 4].some(isBiggerThan10) == [12, 5, 8, 1, 4].mySome(isBiggerThan10)); // true
 
 
 
@@ -268,30 +265,30 @@ Object.myValues = function(object) {
 
 
 
-// Values //
+// // Values //
 
-// Simple array
-let valsArr = ['a', 'b', 'c'];
-console.log(Object.values(valsArr), Object.myValues(valsArr)); // console: ['0', '1', '2']
+// // Simple array
+// let valsArr = ['a', 'b', 'c'];
+// console.log(Object.values(valsArr), Object.myValues(valsArr)); // console: ['0', '1', '2']
 
-// Objects
-let valObj = { a: 'somestring', b: 42, c: false };
-console.log(Object.values(valObj), Object.myValues(valObj));// expected output: Array ["somestring", 42, false]
-valObj = { foo: 'bar', baz: 42 };
-console.log(Object.values(valObj), Object.myValues(valObj)); // ['bar', 42]
+// // Objects
+// let valObj = { a: 'somestring', b: 42, c: false };
+// console.log(Object.values(valObj), Object.myValues(valObj));// expected output: Array ["somestring", 42, false]
+// valObj = { foo: 'bar', baz: 42 };
+// console.log(Object.values(valObj), Object.myValues(valObj)); // ['bar', 42]
 
-// Array-like object
-let valArrayLikeObj = { 0: 'a', 1: 'b', 2: 'c' };
-console.log(Object.values(valArrayLikeObj), Object.myValues(valArrayLikeObj)); // ['a', 'b', 'c']
+// // Array-like object
+// let valArrayLikeObj = { 0: 'a', 1: 'b', 2: 'c' };
+// console.log(Object.values(valArrayLikeObj), Object.myValues(valArrayLikeObj)); // ['a', 'b', 'c']
 
-// Array-like object with random key ordering
-valArrayLikeObj = { 100: 'a', 2: 'b', 7: 'c' };
-console.log(Object.values(valArrayLikeObj), Object.myValues(valArrayLikeObj)); // ['b', 'c', 'a']
+// // Array-like object with random key ordering
+// valArrayLikeObj = { 100: 'a', 2: 'b', 7: 'c' };
+// console.log(Object.values(valArrayLikeObj), Object.myValues(valArrayLikeObj)); // ['b', 'c', 'a']
 
-// getFoo is property which isn't enumerable
-valObj = Object.create({}, { getFoo: { value() { return this.foo; } } });
-valObj.foo = 'bar';
-console.log(Object.values(valObj), Object.myValues(valObj)); // ['bar']
+// // getFoo is property which isn't enumerable
+// valObj = Object.create({}, { getFoo: { value() { return this.foo; } } });
+// valObj.foo = 'bar';
+// console.log(Object.values(valObj), Object.myValues(valObj)); // ['bar']
 
-// non-object argument
-console.log(Object.values('foo'), Object.myValues('foo')); // ['f', 'o', 'o']
+// // non-object argument
+// console.log(Object.values('foo'), Object.myValues('foo')); // ['f', 'o', 'o']
