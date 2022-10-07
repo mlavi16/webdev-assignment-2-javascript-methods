@@ -98,6 +98,7 @@ Object.myKeys = function(object) {
   for (let key in object) {
     keys.push(key);
   }
+  return keys;
 };
 
 // VALUES //
