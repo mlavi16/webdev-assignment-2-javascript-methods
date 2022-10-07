@@ -56,7 +56,13 @@ Array.prototype.myEvery = function(callbackFn) {
 
 // REDUCE //
 Array.prototype.myReduce = function(callbackFn) {
-  // Place your code here.
+  let definedValuesArray = this.myFilter(val => val != undefined);
+
+  let prevVal = definedValuesArray[0];
+  for (let i = 1; i < definedValuesArray.length; i++) {
+    prevVal = callbackFn(prevVal, definedValuesArray[i], i, definedValuesArray);
+  }
+  return prevVal;
 };
 
 // INCLUDES //
@@ -171,3 +177,16 @@ function isPrime(num) {
 
 
 // Every //
+
+
+
+// Reduce //
+const reduceArray = [1, 2, 3, , 4, 0, -5];
+// 1 + 2 + 3 + 4
+const sumWithInitial1 = reduceArray.reduce(
+  (previousValue, currentValue) => previousValue + currentValue);
+const sumWithInitial2 = reduceArray.myReduce(
+  (previousValue, currentValue) => previousValue + currentValue);
+console.log(sumWithInitial1, sumWithInitial2, sumWithInitial1 == sumWithInitial2);
+// expected output: 5
+
