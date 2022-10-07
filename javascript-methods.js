@@ -232,3 +232,11 @@ Object.myValues = function(object) {
 // simple array
 const arr = ['a', 'b', 'c'];
 console.log(Object.keys(arr), Object.myKeys(arr)); // console: ['0', '1', '2']
+// array-like object
+const obj1 = { 0: 'a', 1: 'b', 2: 'c' };
+const obj2 = {a: 'somestring', b: 42, c: false };
+console.log(Object.keys(obj1), Object.myKeys(obj1)); // console: ['0', '1', '2']
+console.log(Object.keys(obj2), Object.myKeys(obj2)); // console: ['a', 'b', 'c']
+// array-like object with random key ordering
+const anObj = { 100: 'a', 2: 'b', 7: 'c' };
+console.log(Object.keys(anObj), Object.myKeys(anObj)); // console: ['2', '7', '100']
