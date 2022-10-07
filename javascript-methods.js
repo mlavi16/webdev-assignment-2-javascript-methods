@@ -198,3 +198,14 @@ const includesArray = [1, 2, 3];
 const pets = ['cat', 'dog', ,'bat'];
 // console.log(pets.includes('cat'), pets.myIncludes('cat'));
 // console.log(pets.includes('at'), pets.myIncludes('at'));
+
+
+// IndexOf //
+const beasts = ['ant', , 'bison', 'camel', 'duck', 'bison'];
+console.log(beasts.indexOf('bison'), beasts.myIndexOf('bison')); // expected output: 2
+console.log(beasts.indexOf('giraffe'), beasts.myIndexOf('giraffe')); // expected output: -1
+
+const indexOfArray = [2, 9, 9];
+console.log(indexOfArray.indexOf(2), indexOfArray.myIndexOf(2)); // 0
+console.log(indexOfArray.indexOf(7), indexOfArray.myIndexOf(7)); // -1
+console.log(indexOfArray.indexOf(9), indexOfArray.myIndexOf(9)); // 1
