@@ -46,7 +46,12 @@ Array.prototype.mySome = function(callbackFn) {
 
 // EVERY //
 Array.prototype.myEvery = function(callbackFn) {
-  // Place your code here.
+  for (let i = 0; i < this.length; i++) {
+    if (!callbackFn(this[i], i, this)) {
+      return false;
+    }
+  }
+  return true;
 };
 
 // REDUCE //
@@ -143,22 +148,26 @@ function isPrime(num) {
 
 
 
-// Some //
-const even = (element) => element % 2 === 0; // checks whether an element is even
-let someArray = [];
-console.log(someArray.some(even) == (someArray.mySome(even)));
-someArray = [1];
-console.log(someArray.some(even) == (someArray.mySome(even)));
-someArray = [2];
-console.log(someArray.some(even) == (someArray.mySome(even)));
-someArray = [1,2,3,4,5,6];
-console.log(someArray.some(even) == (someArray.mySome(even)));
-someArray = [1,33,17,67];
-console.log(someArray.some(even) == (someArray.mySome(even)));
-someArray = [1,-2, -3, , , , -9];
-console.log(someArray.some(even) == (someArray.mySome(even)));
-function isBiggerThan10(element, index, array) {
-  return element > 10;
-}
-console.log([2, 5, 8, 1, 4].some(isBiggerThan10) == [2, 5, 8, 1, 4].mySome(isBiggerThan10));  // false
-console.log([12, 5, 8, 1, 4].some(isBiggerThan10) == [12, 5, 8, 1, 4].mySome(isBiggerThan10)); // true
+// // Some //
+// const even = (element) => element % 2 === 0; // checks whether an element is even
+// let someArray = [];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [2];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1,2,3,4,5,6];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1,33,17,67];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// someArray = [1,-2, -3, , , , -9];
+// console.log(someArray.some(even) == (someArray.mySome(even)));
+// function isBiggerThan10(element, index, array) {
+//   return element > 10;
+// }
+// console.log([2, 5, 8, 1, 4].some(isBiggerThan10) == [2, 5, 8, 1, 4].mySome(isBiggerThan10));  // false
+// console.log([12, 5, 8, 1, 4].some(isBiggerThan10) == [12, 5, 8, 1, 4].mySome(isBiggerThan10)); // true
+
+
+
+// Every //
