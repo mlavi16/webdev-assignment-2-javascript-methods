@@ -15,33 +15,13 @@ Array.prototype.myMap = function(callbackFn) {
     if (this[i] == undefined) {
       myArray.push(undefined);
     } else {
-      myArray.push(callbackFn(this[i]));
+      // callbackFn is invoked with three arguments: 
+      // the value of the element, the index of the element, and the array object being mapped.
+      myArray.push(callbackFn(this[i], i, this));
     }
   }
   return myArray;
 };
-// MAP TEST //
-let myArray = [0, -10, 3, 7, , ,102];
-
-const map1 = myArray.map(x => x * 2);
-const map2 = myArray.myMap(x => x * 2);
-
-const numbers = [1, 4, 9];
-const roots1 = numbers.map((num) => Math.sqrt(num));
-const roots2 = numbers.myMap((num) => Math.sqrt(num));
-
-const kvArray = [
-  { key: 1, value: 10 },
-  { key: 2, value: 20 },
-  { key: 3, value: 30 },
-];
-const reformattedArray1 = kvArray.map(({ key, value}) => ({ [key]: value }));
-const reformattedArray2 = kvArray.myMap(({ key, value}) => ({ [key]: value }));
-
-console.log(map1, map2);
-console.log(roots1, roots2);
-console.log(reformattedArray1, reformattedArray2);
-
 
 // FILTER //
 Array.prototype.myFilter = function(callbackFn) {
@@ -87,3 +67,29 @@ Object.myKeys = function(object) {
 Object.myValues = function(object) {
   // Place your code here.
 };
+
+
+
+
+// -----------------------Testing Functions---------------------------------
+
+// // MAP TEST //
+// let myArray = [0, -10, 3, 7, , ,102];
+// const map1 = myArray.map(x => x * 2);
+// const map2 = myArray.myMap(x => x * 2);
+
+// const numbers = [1, 4, 9];
+// const roots1 = numbers.map((num) => Math.sqrt(num));
+// const roots2 = numbers.myMap((num) => Math.sqrt(num));
+
+// const kvArray = [
+//   { key: 1, value: 10 },
+//   { key: 2, value: 20 },
+//   { key: 3, value: 30 },
+// ];
+// const reformattedArray1 = kvArray.map(({ key, value}) => ({ [key]: value }));
+// const reformattedArray2 = kvArray.myMap(({ key, value}) => ({ [key]: value }));
+
+// console.log(map1, map2);
+// console.log(roots1, roots2);
+// console.log(reformattedArray1, reformattedArray2);
