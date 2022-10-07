@@ -106,9 +106,10 @@ Object.myKeys = function(object) {
 // VALUES //
 Object.myValues = function(object) {
   let values = [];
-  let keys = Object.myKeys(object);
-  for (let key of keys) {
-    values.push(object[key]);
+  for (let key in object) {
+    if (Object.hasOwn(object, key)) {
+      values.push(object[key]);
+    }
   }
   return values;
 };
@@ -237,8 +238,8 @@ Object.myValues = function(object) {
 // // Keys //
 
 // // simple array
-// const keysSimpleArr = ['a', 'b', 'c'];
-// console.log(Object.keys(keysSimpleArr), Object.myKeys(keysSimpleArr)); // console: ['0', '1', '2']
+// const keysArr = ['a', 'b', 'c'];
+// console.log(Object.keys(keysArr), Object.myKeys(keysArr)); // console: ['0', '1', '2']
 // // array-like object
 // const obj1 = { 0: 'a', 1: 'b', 2: 'c' };
 // const obj2 = {a: 'somestring', b: 42, c: false };
@@ -259,5 +260,29 @@ Object.myValues = function(object) {
 
 
 // Values //
-const valueObject = { a: 'somestring', b: 42, c: false };
-console.log(Object.values(valueObject), Object.myValues(valueObject));// expected output: Array ["somestring", 42, false]
+
+// Simple array
+let valsArr = ['a', 'b', 'c'];
+console.log(Object.values(valsArr), Object.myValues(valsArr)); // console: ['0', '1', '2']
+
+// Objects
+let valObj = { a: 'somestring', b: 42, c: false };
+console.log(Object.values(valObj), Object.myValues(valObj));// expected output: Array ["somestring", 42, false]
+valObj = { foo: 'bar', baz: 42 };
+console.log(Object.values(valObj), Object.myValues(valObj)); // ['bar', 42]
+
+// Array-like object
+let valArrayLikeObj = { 0: 'a', 1: 'b', 2: 'c' };
+console.log(Object.values(valArrayLikeObj), Object.myValues(valArrayLikeObj)); // ['a', 'b', 'c']
+
+// Array-like object with random key ordering
+valArrayLikeObj = { 100: 'a', 2: 'b', 7: 'c' };
+console.log(Object.values(valArrayLikeObj), Object.myValues(valArrayLikeObj)); // ['b', 'c', 'a']
+
+// getFoo is property which isn't enumerable
+valObj = Object.create({}, { getFoo: { value() { return this.foo; } } });
+valObj.foo = 'bar';
+console.log(Object.values(valObj), Object.myValues(valObj)); // ['bar']
+
+// non-object argument
+console.log(Object.values('foo'), Object.myValues('foo')); // ['f', 'o', 'o']
