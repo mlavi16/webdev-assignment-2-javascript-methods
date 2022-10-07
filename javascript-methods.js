@@ -96,7 +96,9 @@ Array.prototype.myLastIndexOf = function(searchElement) {
 Object.myKeys = function(object) {
   let keys = [];
   for (let key in object) {
-    keys.push(key);
+    if (Object.hasOwn(object, key)) {
+      keys.push(key);
+    }
   }
   return keys;
 };
@@ -230,8 +232,8 @@ Object.myValues = function(object) {
 // Object.keys() //
 
 // simple array
-const arr = ['a', 'b', 'c'];
-console.log(Object.keys(arr), Object.myKeys(arr)); // console: ['0', '1', '2']
+const keysSimpleArr = ['a', 'b', 'c'];
+console.log(Object.keys(keysSimpleArr), Object.myKeys(keysSimpleArr)); // console: ['0', '1', '2']
 // array-like object
 const obj1 = { 0: 'a', 1: 'b', 2: 'c' };
 const obj2 = {a: 'somestring', b: 42, c: false };
