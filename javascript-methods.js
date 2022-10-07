@@ -84,7 +84,12 @@ Array.prototype.myIndexOf = function(searchElement) {
 
 // LASTINDEXOF //
 Array.prototype.myLastIndexOf = function(searchElement) {
-  // Place your code here.
+  for (let i = this.length - 1; i >= 0; i++) {
+    if (this[i] === searchElement) {
+      return i;
+    }
+  }
+  return -1;
 };
 
 // KEYS //
@@ -202,10 +207,10 @@ const pets = ['cat', 'dog', ,'bat'];
 
 // IndexOf //
 const beasts = ['ant', , 'bison', 'camel', 'duck', 'bison'];
-console.log(beasts.indexOf('bison'), beasts.myIndexOf('bison')); // expected output: 2
-console.log(beasts.indexOf('giraffe'), beasts.myIndexOf('giraffe')); // expected output: -1
+// console.log(beasts.indexOf('bison'), beasts.myIndexOf('bison')); // expected output: 2
+// console.log(beasts.indexOf('giraffe'), beasts.myIndexOf('giraffe')); // expected output: -1
 
 const indexOfArray = [2, 9, 9];
-console.log(indexOfArray.indexOf(2), indexOfArray.myIndexOf(2)); // 0
-console.log(indexOfArray.indexOf(7), indexOfArray.myIndexOf(7)); // -1
-console.log(indexOfArray.indexOf(9), indexOfArray.myIndexOf(9)); // 1
+// console.log(indexOfArray.indexOf(2), indexOfArray.myIndexOf(2)); // 0
+// console.log(indexOfArray.indexOf(7), indexOfArray.myIndexOf(7)); // -1
+// console.log(indexOfArray.indexOf(9), indexOfArray.myIndexOf(9)); // 1
