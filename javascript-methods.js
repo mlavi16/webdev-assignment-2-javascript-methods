@@ -105,7 +105,12 @@ Object.myKeys = function(object) {
 
 // VALUES //
 Object.myValues = function(object) {
-  // Place your code here.
+  let values = [];
+  let keys = Object.myKeys(object);
+  for (let key of keys) {
+    values.push(object[key]);
+  }
+  return values;
 };
 
 
@@ -229,24 +234,30 @@ Object.myValues = function(object) {
 
 
 
-// Object.keys() //
+// // Keys //
 
-// simple array
-const keysSimpleArr = ['a', 'b', 'c'];
-console.log(Object.keys(keysSimpleArr), Object.myKeys(keysSimpleArr)); // console: ['0', '1', '2']
-// array-like object
-const obj1 = { 0: 'a', 1: 'b', 2: 'c' };
-const obj2 = {a: 'somestring', b: 42, c: false };
-console.log(Object.keys(obj1), Object.myKeys(obj1)); // console: ['0', '1', '2']
-console.log(Object.keys(obj2), Object.myKeys(obj2)); // console: ['a', 'b', 'c']
-// array-like object with random key ordering
-const anObj = { 100: 'a', 2: 'b', 7: 'c' };
-console.log(Object.keys(anObj), Object.myKeys(anObj)); // console: ['2', '7', '100']
-// getFoo is a property which isn't enumerable
-const myObj = Object.create({}, {
-  getFoo: {
-    value() { return this.foo; }
-  }
-});
-myObj.foo = 1;
-console.log(Object.keys(myObj), Object.myKeys(myObj)); // console: ['foo']
+// // simple array
+// const keysSimpleArr = ['a', 'b', 'c'];
+// console.log(Object.keys(keysSimpleArr), Object.myKeys(keysSimpleArr)); // console: ['0', '1', '2']
+// // array-like object
+// const obj1 = { 0: 'a', 1: 'b', 2: 'c' };
+// const obj2 = {a: 'somestring', b: 42, c: false };
+// console.log(Object.keys(obj1), Object.myKeys(obj1)); // console: ['0', '1', '2']
+// console.log(Object.keys(obj2), Object.myKeys(obj2)); // console: ['a', 'b', 'c']
+// // array-like object with random key ordering
+// const anObj = { 100: 'a', 2: 'b', 7: 'c' };
+// console.log(Object.keys(anObj), Object.myKeys(anObj)); // console: ['2', '7', '100']
+// // getFoo is a property which isn't enumerable
+// const myObj = Object.create({}, {
+//   getFoo: {
+//     value() { return this.foo; }
+//   }
+// });
+// myObj.foo = 1;
+// console.log(Object.keys(myObj), Object.myKeys(myObj)); // console: ['foo']
+
+
+
+// Values //
+const valueObject = { a: 'somestring', b: 42, c: false };
+console.log(Object.values(valueObject), Object.myValues(valueObject));// expected output: Array ["somestring", 42, false]
