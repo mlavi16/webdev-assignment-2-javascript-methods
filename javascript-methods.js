@@ -15,7 +15,9 @@ Array.prototype.myMap = function(callbackFn) {
     if (this[i] == undefined) {
       myArray.push(undefined);
     } else {
-      myArray.push(callbackFn(this[i]));
+      // callbackFn is invoked with three arguments: 
+      // the value of the element, the index of the element, and the array object being mapped.
+      myArray.push(callbackFn(this[i], i, this));
     }
   }
   return myArray;
@@ -119,6 +121,7 @@ Object.myValues = function(object) {
 
 // -----------------------Testing Functions--------------------------------- //
 
+
 // Array.prototype.equals = function (array) {
 //   // if the other array is a falsy value, return
 //   if (!array)
@@ -151,7 +154,13 @@ Object.myValues = function(object) {
 
 
 // // Map //
+// let myArray = [0, -10, 3, 7, , ,102];
+// const map1 = myArray.map(x => x * 2);
+// const map2 = myArray.myMap(x => x * 2);
 
+// const numbers = [1, 4, 9];
+// const roots1 = numbers.map((num) => Math.sqrt(num));
+// const roots2 = numbers.myMap((num) => Math.sqrt(num));
 
 // // Filter //
 // const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
