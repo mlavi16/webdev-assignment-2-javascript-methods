@@ -183,3 +183,14 @@ const sumWithInitial2 = reduceArray.myReduce(
   (previousValue, currentValue) => previousValue + currentValue);
 // console.log(sumWithInitial1, sumWithInitial2, sumWithInitial1 == sumWithInitial2);
 
+
+// Includes //
+const includesArray = [1, 2, 3];
+console.log(includesArray.includes(2), includesArray.myIncludes(2));
+console.log(includesArray.includes(), includesArray.myIncludes());
+console.log(includesArray.includes(true), includesArray.myIncludes(true));
+console.log(includesArray.includes(-1), includesArray.myIncludes(-1));
+
+const pets = ['cat', 'dog', ,'bat'];
+console.log(pets.includes('cat'), pets.myIncludes('cat'));
+console.log(pets.includes('at'), pets.myIncludes('at'));
