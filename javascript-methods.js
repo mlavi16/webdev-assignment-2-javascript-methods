@@ -64,7 +64,7 @@ Array.prototype.myReduce = function(callbackFn) {
 
 // INCLUDES //
 Array.prototype.myIncludes = function(searchElement) {
-  for (let el in this) {
+  for (let el of this) {
     if (el === searchElement) {
       return true;
     }
