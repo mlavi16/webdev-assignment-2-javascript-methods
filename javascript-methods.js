@@ -242,3 +242,11 @@ console.log(Object.keys(obj2), Object.myKeys(obj2)); // console: ['a', 'b', 'c']
 // array-like object with random key ordering
 const anObj = { 100: 'a', 2: 'b', 7: 'c' };
 console.log(Object.keys(anObj), Object.myKeys(anObj)); // console: ['2', '7', '100']
+// getFoo is a property which isn't enumerable
+const myObj = Object.create({}, {
+  getFoo: {
+    value() { return this.foo; }
+  }
+});
+myObj.foo = 1;
+console.log(Object.keys(myObj), Object.myKeys(myObj)); // console: ['foo']
