@@ -74,7 +74,12 @@ Array.prototype.myIncludes = function(searchElement) {
 
 // INDEXOF //
 Array.prototype.myIndexOf = function(searchElement) {
-  // Place your code here.
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === searchElement) {
+      return i;
+    }
+  }
+  return -1;
 };
 
 // LASTINDEXOF //
@@ -186,11 +191,10 @@ const sumWithInitial2 = reduceArray.myReduce(
 
 // Includes //
 const includesArray = [1, 2, 3];
-console.log(includesArray.includes(2), includesArray.myIncludes(2));
-console.log(includesArray.includes(), includesArray.myIncludes());
-console.log(includesArray.includes(true), includesArray.myIncludes(true));
-console.log(includesArray.includes(-1), includesArray.myIncludes(-1));
-
+// console.log(includesArray.includes(2), includesArray.myIncludes(2));
+// console.log(includesArray.includes(), includesArray.myIncludes());
+// console.log(includesArray.includes(true), includesArray.myIncludes(true));
+// console.log(includesArray.includes(-1), includesArray.myIncludes(-1));
 const pets = ['cat', 'dog', ,'bat'];
-console.log(pets.includes('cat'), pets.myIncludes('cat'));
-console.log(pets.includes('at'), pets.myIncludes('at'));
+// console.log(pets.includes('cat'), pets.myIncludes('cat'));
+// console.log(pets.includes('at'), pets.myIncludes('at'));
