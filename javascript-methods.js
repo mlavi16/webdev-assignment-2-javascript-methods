@@ -15,7 +15,9 @@ Array.prototype.myMap = function(callbackFn) {
     if (this[i] == undefined) {
       myArray.push(undefined);
     } else {
-      myArray.push(callbackFn(this[i]));
+      // callbackFn is invoked with three arguments: 
+      // the value of the element, the index of the element, and the array object being mapped.
+      myArray.push(callbackFn(this[i], i, this));
     }
   }
   return myArray;
@@ -85,40 +87,47 @@ Object.myValues = function(object) {
 
 
 
-// -----------------------Testing Functions--------------------------------- //
+// -----------------------Testing Functions---------------------------------
 
-Array.prototype.equals = function (array) {
-  // if the other array is a falsy value, return
-  if (!array)
-    return false;
+// Array.prototype.equals = function (array) {
+//   // if the other array is a falsy value, return
+//   if (!array)
+//     return false;
 
-  // compare lengths - can save a lot of time 
-  if (this.length != array.length) {
-    console.log(this, " == ", array, " is ", false, " [0]");
-    return false;
-  }
+//   // compare lengths - can save a lot of time 
+//   if (this.length != array.length) {
+//     console.log(this, " == ", array, " is ", false, " [0]");
+//     return false;
+//   }
 
-  for (var i = 0, l=this.length; i < l; i++) {
-    // Check if we have nested arrays
-    if (this[i] instanceof Array && array[i] instanceof Array) {
-      // recurse into the nested arrays
-      if (!this[i].equals(array[i])) {
-        console.log(this, " == ", array, " is ", false, " [1]");
-        return false;       
-      }
-    }           
-    else if (this[i] != array[i]) { 
-      // Warning - two different object instances will never be equal: {x:20} != {x:20}
-      console.log(this, " == ", array, " is ", false, " [2]");
-      return false;   
-    }           
-  } 
-  console.log(this, " == ", array, " is ", true);      
-  return true;
-}
+//   for (var i = 0, l=this.length; i < l; i++) {
+//     // Check if we have nested arrays
+//     if (this[i] instanceof Array && array[i] instanceof Array) {
+//       // recurse into the nested arrays
+//       if (!this[i].equals(array[i])) {
+//         console.log(this, " == ", array, " is ", false, " [1]");
+//         return false;       
+//       }
+//     }           
+//     else if (this[i] != array[i]) { 
+//       // Warning - two different object instances will never be equal: {x:20} != {x:20}
+//       console.log(this, " == ", array, " is ", false, " [2]");
+//       return false;   
+//     }           
+//   } 
+//   console.log(this, " == ", array, " is ", true);      
+//   return true;
+// }
 
 
-// Map //
+// // MAP TEST //
+// let myArray = [0, -10, 3, 7, , ,102];
+// const map1 = myArray.map(x => x * 2);
+// const map2 = myArray.myMap(x => x * 2);
+
+// const numbers = [1, 4, 9];
+// const roots1 = numbers.map((num) => Math.sqrt(num));
+// const roots2 = numbers.myMap((num) => Math.sqrt(num));
 
 
 // Filter //
