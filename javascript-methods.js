@@ -94,7 +94,10 @@ Array.prototype.myLastIndexOf = function(searchElement) {
 
 // KEYS //
 Object.myKeys = function(object) {
-  // Place your code here.
+  let keys = [];
+  for (let key in object) {
+    keys.push(key);
+  }
 };
 
 // VALUES //
