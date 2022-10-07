@@ -15,7 +15,9 @@ Array.prototype.myMap = function(callbackFn) {
     if (this[i] == undefined) {
       myArray.push(undefined);
     } else {
-      myArray.push(callbackFn(this[i]));
+      // callbackFn is invoked with three arguments: 
+      // the value of the element, the index of the element, and the array object being mapped.
+      myArray.push(callbackFn(this[i], i, this));
     }
   }
   return myArray;
@@ -75,56 +77,25 @@ Object.myValues = function(object) {
 
 
 
-// -----------------------Testing Functions--------------------------------- //
+// -----------------------Testing Functions---------------------------------
 
-Array.prototype.equals = function (array) {
-  // if the other array is a falsy value, return
-  if (!array)
-    return false;
+// // MAP TEST //
+// let myArray = [0, -10, 3, 7, , ,102];
+// const map1 = myArray.map(x => x * 2);
+// const map2 = myArray.myMap(x => x * 2);
 
-  // compare lengths - can save a lot of time 
-  if (this.length != array.length) {
-    console.log(this, " == ", array, " is ", false, " [0]");
-    return false;
-  }
+// const numbers = [1, 4, 9];
+// const roots1 = numbers.map((num) => Math.sqrt(num));
+// const roots2 = numbers.myMap((num) => Math.sqrt(num));
 
-  for (var i = 0, l=this.length; i < l; i++) {
-    // Check if we have nested arrays
-    if (this[i] instanceof Array && array[i] instanceof Array) {
-      // recurse into the nested arrays
-      if (!this[i].equals(array[i])) {
-        console.log(this, " == ", array, " is ", false, " [1]");
-        return false;       
-      }
-    }           
-    else if (this[i] != array[i]) { 
-      // Warning - two different object instances will never be equal: {x:20} != {x:20}
-      console.log(this, " == ", array, " is ", false, " [2]");
-      return false;   
-    }           
-  } 
-  console.log(this, " == ", array, " is ", true);      
-  return true;
-}
+// const kvArray = [
+//   { key: 1, value: 10 },
+//   { key: 2, value: 20 },
+//   { key: 3, value: 30 },
+// ];
+// const reformattedArray1 = kvArray.map(({ key, value}) => ({ [key]: value }));
+// const reformattedArray2 = kvArray.myMap(({ key, value}) => ({ [key]: value }));
 
-
-// Map //
-
-
-// Filter //
-const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
-const result1 = words.filter(word => word.length > 6);
-const result2 = words.myFilter(word => word.length > 6);
-result1.equals(result2); // [ 'exuberant', 'destruction', 'present' ]
-
-const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-function isPrime(num) {
-  for (let i = 2; num > i; i++) {
-    if (num % i === 0) {
-      return false;
-    }
-  }
-  return num > 1;
-}
-array.filter(isPrime).equals(array.myFilter(isPrime)) // [2, 3, 5, 7, 11, 13]
-
+// console.log(map1, map2);
+// console.log(roots1, roots2);
+// console.log(reformattedArray1, reformattedArray2);
