@@ -1,5 +1,5 @@
-# javascript-methods-starter-template-code
-Starter template code for Assignment 2 - JavaScript Methods. 
+# javascript-methods-assignment-code
+This repository is the code for Assignment 2 - JavaScript Methods. Created by Maya Lavi (@mlavi16).
 
 ## JavaScript Prototype: Method ##
 Every object in JavaScript has a built-in property called "prototype." 
